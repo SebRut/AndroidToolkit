@@ -1,0 +1,6 @@
+[submodule "Dependencies/AndroidLib"]
+	path = Dependencies/AndroidLib
+	url = https://github.com/regaw-leinad/AndroidLib
+[submodule "Dependencies/AndroidDeviceConfig"]
+	path = Dependencies/AndroidDeviceConfig
+	url = https://github.com/SebRut/AndroidDeviceConfig.git
