@@ -168,8 +168,24 @@
                 </Grid>
             </TabItem>
             <TabItem Header="ADB">
-                <Label Content="In progress." Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"
-                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                <Grid VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Grid.Column="0" Header="Boot Options">
+                        <StackPanel>
+                            <Button Margin="2">Reboot</Button>
+                            <Button Margin="2">Recovery</Button>
+                            <Button Margin="2">Fastboot</Button>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Grid.Column="1" Header="Miscellaneous">
+                        <StackPanel>
+                            <Button Margin="2">Install APK</Button>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
             </TabItem>
             <TabItem Header="Fastboot">
                 <Label Content="In progress." Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -178,15 +194,46 @@
             <TabItem Header="About" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid Margin="0" >
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Margin="5" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">Links</Label>
                     <controls:Tile Margin="5" Grid.Row="1" Grid.Column="0" Width="Auto" Height="Auto" Title="GitHub" Command="{StaticResource OpenLinkCommand}" CommandParameter="https://github.com/SebRut/AndroidToolkit"/>
-                    <controls:Tile Content="" Margin="5" Grid.Row="0" Grid.Column="0" Width="Auto" Height="Auto" Title="Device Requests" Command="{StaticResource OpenLinkCommand}" CommandParameter="https://github.com/SebRut/AndroidToolkit/blob/master/CONTRIBUTE.md#request-a-device"/>
+                    <controls:Tile Content="" Margin="5" Grid.Row="2" Grid.Column="0" Width="Auto" Height="Auto" Title="Device Requests" Command="{StaticResource OpenLinkCommand}" CommandParameter="https://github.com/SebRut/AndroidToolkit/blob/master/CONTRIBUTE.md#request-a-device"/>
+                    <Label Grid.Column="1" Grid.Row="0" Margin="5" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">Credits</Label>
+                    <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+                        <ListBox HorizontalAlignment="Center">
+                            <ListBox.Items>
+                                <ListBoxItem HorizontalContentAlignment="Center">
+                                    <TextBlock>
+                                        <Hyperlink Command="{StaticResource OpenLinkCommand}" CommandParameter="https://github.com/WindyCityRockr/WinDroid_Universal_HTC_Toolkit" TextDecorations="None">WinDroid HTC Toolkit by WindyCityRockr</Hyperlink>
+                                    </TextBlock>
+                                </ListBoxItem>
+                                <ListBoxItem HorizontalContentAlignment="Center">
+                                    <TextBlock>
+                                        <Hyperlink Command="{StaticResource OpenLinkCommand}" CommandParameter="https://dotnetzip.codeplex.com/" TextDecorations="None">
+                                            DotNetZip
+                                        </Hyperlink>,
+                                        <Hyperlink Command="{StaticResource OpenLinkCommand}" CommandParameter="https://github.com/MahApps/MahApps.Metro" TextDecorations="None">
+                                            MahApps Metro Design for WPF
+                                        </Hyperlink>
+                                    </TextBlock>
+                                </ListBoxItem>
+                                <ListBoxItem HorizontalContentAlignment="Center">
+                                    <TextBlock>
+                                        <Hyperlink Command="{StaticResource OpenLinkCommand}" CommandParameter="https://github.com/regaw-leinad/AndroidLib" TextDecorations="None">
+                                            AndroidLib by RegawMOD
+                                        </Hyperlink>
+                                    </TextBlock>
+                                </ListBoxItem>
+                            </ListBox.Items>
+                        </ListBox>
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>

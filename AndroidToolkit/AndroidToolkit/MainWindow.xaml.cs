@@ -135,10 +135,7 @@ namespace de.sebastianrutofski.AndroidToolkit
                         switch (DeviceModel.Device.State)
                         {
                             case DeviceState.ONLINE:
-                                if (DeviceModel.Device.BuildProp.GetProp("ro.product.model") == null)
-                                {
-                                }
-                                else
+                                if (DeviceModel.Device.BuildProp.GetProp("ro.product.model") != null)
                                 {
                                     foreach (DeviceConfig deviceConfig in _Devices)
                                     {
