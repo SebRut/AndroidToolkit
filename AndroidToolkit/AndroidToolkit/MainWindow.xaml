@@ -23,6 +23,9 @@
             <RoutedCommand x:Key="ReloadDeviceCommand" />
             <RoutedCommand x:Key="ToggleLogCommand" />
             <RoutedCommand x:Key="OpenLinkCommand" />
+            <RoutedCommand x:Key="RebootDeviceCommand" />
+            <RoutedCommand x:Key="RebootFastbootCommand" />
+            <RoutedCommand x:Key="RebootRecoveryCommand" />
         </ResourceDictionary>
     </controls:MetroWindow.Resources>
     <controls:MetroWindow.WindowCommands>
@@ -36,6 +39,9 @@
                         CanExecute="ReloadDeviceCommand_CanExecute" />
         <CommandBinding Command="{StaticResource ToggleLogCommand}" Executed="ToggleLogCommand_Executed" />
         <CommandBinding Command="{StaticResource OpenLinkCommand}" Executed="OpenLinkCommand_Executed" />
+        <CommandBinding Command="{StaticResource RebootDeviceCommand}" Executed="RebootDeviceCommand_Executed" />
+        <CommandBinding Command="{StaticResource RebootFastbootCommand}" Executed="RebootFastbootCommand_Executed" />
+        <CommandBinding Command="{StaticResource RebootRecoveryCommand}" Executed="RebootRecoveryCommand_Executed" />
     </controls:MetroWindow.CommandBindings>
     <controls:MetroWindow.Flyouts>
         <controls:FlyoutsControl>
@@ -175,14 +181,14 @@
                     </Grid.ColumnDefinitions>
                     <GroupBox Grid.Column="0" Header="Boot Options">
                         <StackPanel>
-                            <Button Margin="2">Reboot</Button>
-                            <Button Margin="2">Recovery</Button>
-                            <Button Margin="2">Fastboot</Button>
+                            <Button Margin="2" Command="{StaticResource RebootDeviceCommand}" IsEnabled="{Binding Device, Converter={StaticResource nullToBoolConverter}}">Reboot</Button>
+                            <Button Margin="2" Command="{StaticResource RebootRecoveryCommand}" IsEnabled="{Binding Device, Converter={StaticResource nullToBoolConverter}}">Recovery</Button>
+                            <Button Margin="2" Command="{StaticResource RebootFastbootCommand}" IsEnabled="{Binding Device, Converter={StaticResource nullToBoolConverter}}">Fastboot</Button>
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Grid.Column="1" Header="Miscellaneous">
                         <StackPanel>
-                            <Button Margin="2">Install APK</Button>
+                            <Button Margin="2"  IsEnabled="{Binding Device, Converter={StaticResource nullToBoolConverter}}">Install APK</Button>
                         </StackPanel>
                     </GroupBox>
                 </Grid>

@@ -375,5 +375,20 @@ namespace de.sebastianrutofski.AndroidToolkit
             }
             _OperationRunning = false;
         }
+
+        private void RebootDeviceCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            DeviceModel.Device.Reboot();
+        }
+
+        private void RebootFastbootCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            DeviceModel.Device.RebootBootloader();
+        }
+
+        private void RebootRecoveryCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            DeviceModel.Device.RebootRecovery();
+        }
     }
 }
