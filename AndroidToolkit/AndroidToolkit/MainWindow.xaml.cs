@@ -317,13 +317,13 @@ namespace de.sebastianrutofski.AndroidToolkit
             {
 
                 var recovery = ((RecoveryModel)recoveriesList.SelectedItem);
-                if (!File.Exists("Data/Recoveries/" + recovery.Name + "_" + DeviceModel.GetHashCode() + ".img"))
+                string recoveryPath = String.Format("Data/Recoveries/{0}_{1}_{2}.img",recovery.Name, DeviceModel.Device,DeviceModel.Version).Replace(" ", String.Empty);
+                if (!File.Exists(recoveryPath))
                 {
                     await DownloadFile(recovery.DownloadUrl,
-                        "Data/Recoveries/" + recovery.Name + "_" + DeviceModel.GetHashCode() + ".img");
+                        recoveryPath);
                 }
-                await PerformFastbootCommand("flash " + "recovery " + "Data/Recoveries/" + recovery.Name + "_" +
-                                             DeviceModel.GetHashCode() + ".img");
+                await PerformFastbootCommand("flash " + "recovery " + recoveryPath);
             }
             _OperationRunning = false;
         }
