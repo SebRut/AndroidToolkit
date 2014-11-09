@@ -35,6 +35,17 @@ namespace de.sebastianrutofski.AndroidToolkit.Models
             }
         }
 
+        public string Md5
+        {
+            get { return _Recovery.Md5; }
+            set
+            {
+                if (_Recovery.Md5.Equals(value)) return;
+                _Recovery.Md5 = value;
+                OnPropertyChanged();
+            }
+        }
+
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;

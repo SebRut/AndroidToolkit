@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -317,13 +318,35 @@ namespace de.sebastianrutofski.AndroidToolkit
             {
 
                 var recovery = ((RecoveryModel)recoveriesList.SelectedItem);
-                string recoveryPath = String.Format("Data/Recoveries/{0}_{1}_{2}.img",recovery.Name, DeviceModel.Device,DeviceModel.Version).Replace(" ", String.Empty);
+                string recoveryPath = String.Format("Data/Recoveries/{0}_{1}_{2}_{3}.img",recovery.Name, DeviceModel.Config.Vendor, DeviceModel.Config.Name, /*DeviceModel.Version.Name*/"").Replace(" ", String.Empty);
                 if (!File.Exists(recoveryPath))
                 {
                     await DownloadFile(recovery.DownloadUrl,
                         recoveryPath);
                 }
-                await PerformFastbootCommand("flash " + "recovery " + recoveryPath);
+                if (recovery.Md5 != String.Empty)
+                {
+                    bool md5sEqual = false;
+                    using (var md5 = MD5.Create())
+                    {
+                        using (var stream = File.OpenRead(recoveryPath))
+                        {
+                            string downloadMd5 = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", String.Empty).ToLowerInvariant();
+                            md5sEqual = downloadMd5 == recovery.Md5;
+                        }
+                    }
+
+                    if (!md5sEqual)
+                    {
+                        await this.ShowMessageAsync("Download failed!", "The Md5s differ, please download again.");
+                        File.Delete(recoveryPath);
+                    }
+                    else
+                    {
+                        await PerformFastbootCommand("flash " + "recovery " + recoveryPath);
+                    }
+                }
+                
             }
             _OperationRunning = false;
         }
